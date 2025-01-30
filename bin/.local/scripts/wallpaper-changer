@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+bg_dir=$XDG_CONFIG_HOME/backgrounds/
+
+if [[ $# -eq 1 ]]; then
+	selected=$1
+else
+	selected=$(find $bg_dir | fzf)
+fi
+
+if [[ -z $selected ]]; then
+	exit 0
+fi
+
+selected_name=$selected
+
+wal -i $selected_name -s -t 
