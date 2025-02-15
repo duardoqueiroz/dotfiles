@@ -17,13 +17,13 @@ uptime="`uptime -p | sed -e 's/up //g'`"
 host=`hostnamectl hostname`
 
 # Options
-shutdown=' Shutdown'
-reboot=' Reboot'
-lock=' Lock'
-suspend=' Suspend'
-logout=' Logout'
-yes=' Yes'
-no=' No'
+shutdown=' Desligar'
+reboot=' Reiniciar'
+lock=' Bloquear'
+suspend=' Suspender'
+logout=' Sair'
+yes=' Sim'
+no=' Não'
 
 # Rofi CMD
 rofi_cmd() {
@@ -35,10 +35,14 @@ rofi_cmd() {
 
 # Confirmation CMD
 confirm_cmd() {
-	rofi 
+	rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 350px;}' \
+		-theme-str 'mainbox {children: [ "message", "listview" ];}' \
+		-theme-str 'listview {columns: 2; lines: 1;}' \
+		-theme-str 'element-text {horizontal-align: 0.5;}' \
+		-theme-str 'textbox {horizontal-align: 0.5;}' \
 		-dmenu \
 		-p 'Confirmation' \
-		-mesg 'Are you Sure?' \
+		-mesg 'Tem certeza?' \
 		-theme ${dir}/${theme}.rasi
 }
 
