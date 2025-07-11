@@ -68,6 +68,13 @@ return {
 
       local servers = {
         bashls = true,
+        eslint_d = {
+          on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+            client.server_capabilities.completionProvider = nil
+          end,
+        },
         gopls = {
           settings = {
             gopls = {
@@ -218,6 +225,15 @@ return {
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
           vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
           vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+          vim.keymap.set("n", "<leader>E", function()
+            vim.diagnostic.open_float({ bufnr = 0 }, { scope = "line" })
+          end, { desc = "Ver erro na linha atual" })
+          -- vim.keymap.set(
+          --   "n",
+          --   "<leader>E",
+          --   "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>",
+          --   { noremap = true, silent = true }
+          -- )
 
           vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = 0 })
           vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { buffer = 0 })
